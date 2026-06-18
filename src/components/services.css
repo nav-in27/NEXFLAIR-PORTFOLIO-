@@ -1,0 +1,319 @@
+/* --- Cinematic Services Styles --- */
+
+.cinematic-services {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.services-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Intro Scene */
+.scene-intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  text-align: center;
+}
+
+.intro-line {
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, #fff, transparent);
+  margin-bottom: 40px;
+  animation: pulseLine 2s infinite;
+}
+
+@keyframes pulseLine {
+  0% { transform: scaleY(0.5); opacity: 0.3; }
+  50% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0.5); opacity: 0.3; }
+}
+
+.intro-text {
+  font-size: clamp(30px, 4vw, 70px);
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.intro-line-1, .intro-line-3 {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+}
+
+.intro-line-2, .intro-line-4 {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Common Scene Structure */
+.service-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transform-style: preserve-3d;
+}
+
+.scene-bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.scene-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.scene-headline {
+  font-size: clamp(60px, 8vw, 150px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.4) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+}
+
+.scene-desc {
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+}
+
+/* Ambient Glows */
+.ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vw;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.color-web { background: radial-gradient(circle, #00f0ff, transparent 60%); }
+.color-uiux { background: radial-gradient(circle, #ff007b, transparent 60%); }
+.color-ai { background: radial-gradient(circle, #8a2be2, transparent 60%); }
+.color-marketing { background: radial-gradient(circle, #00ff88, transparent 60%); }
+.color-branding { background: radial-gradient(circle, #ffaa00, transparent 60%); }
+
+/* Scene 01: Web Development */
+.web-code {
+  position: absolute;
+  font-family: 'Fira Code', monospace;
+  color: #00f0ff;
+  font-size: 24px;
+  opacity: 0.3;
+  white-space: nowrap;
+}
+.web-code:not(.outline) { top: 20%; left: 10%; transform: rotateZ(-5deg); }
+.web-code.outline { 
+  top: 70%; right: 5%; 
+  color: transparent; 
+  -webkit-text-stroke: 1px #00f0ff; 
+  transform: rotateZ(10deg); 
+}
+
+.web-browser {
+  position: absolute;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: rgba(0, 20, 40, 0.4);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 30px 60px rgba(0,240,255,0.1);
+}
+.web-browser:not(.offset) { width: 400px; height: 300px; top: 15%; right: 15%; transform: rotateY(-15deg) rotateX(10deg); }
+.web-browser.offset { width: 300px; height: 400px; bottom: 10%; left: 10%; transform: rotateY(20deg) rotateX(-5deg); }
+
+/* Scene 02: UI/UX */
+.wireframe-box {
+  position: absolute;
+  border: 2px dashed rgba(255, 0, 123, 0.3);
+  border-radius: 20px;
+}
+.wireframe-box:not(.tall) { width: 500px; height: 100px; top: 25%; left: 20%; transform: rotateZ(-2deg); }
+.wireframe-box.tall { width: 250px; height: 400px; bottom: 15%; right: 25%; transform: rotateZ(4deg); }
+
+.cursor-element {
+  position: absolute;
+  top: 40%;
+  left: 60%;
+  width: 0; 
+  height: 0; 
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 35px solid #ff007b;
+  transform: rotate(30deg);
+  filter: drop-shadow(0 10px 20px rgba(255,0,123,0.4));
+}
+
+/* Scene 03: AI Solutions */
+.neural-node {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #8a2be2;
+  border-radius: 50%;
+  box-shadow: 0 0 40px 10px rgba(138,43,226,0.6);
+}
+.node-1 { top: 20%; left: 20%; }
+.node-2 { top: 50%; right: 20%; }
+.node-3 { bottom: 20%; left: 30%; }
+.node-4 { top: 80%; right: 30%; }
+
+.neural-connections {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.neural-line {
+  stroke: rgba(138,43,226,0.3);
+  stroke-width: 0.5;
+  stroke-dasharray: 5, 5;
+  animation: flow 20s linear infinite;
+}
+@keyframes flow { to { stroke-dashoffset: 1000; } }
+
+/* Scene 04: Digital Marketing */
+.chart-bar {
+  position: absolute;
+  bottom: -10%;
+  width: 80px;
+  background: linear-gradient(to top, rgba(0,255,136,0.1), #00ff88);
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -20px 50px rgba(0,255,136,0.2);
+}
+.bar-1 { height: 40vh; left: 15%; }
+.bar-2 { height: 60vh; left: 30%; }
+.bar-3 { height: 85vh; right: 20%; }
+
+.metric-counter {
+  position: absolute;
+  top: 30%;
+  right: 25%;
+  font-size: 80px;
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 2px #00ff88;
+  font-family: monospace;
+}
+
+/* Scene 05: Brand Identity */
+.brand-shape {
+  position: absolute;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 170, 0, 0.3);
+}
+.shape-circle { width: 300px; height: 300px; border-radius: 50%; top: 15%; right: 25%; background: rgba(255,170,0,0.1); }
+.shape-square { width: 250px; height: 250px; bottom: 20%; left: 20%; transform: rotate(45deg); background: rgba(255,170,0,0.2); }
+.shape-triangle { 
+  width: 0; height: 0; 
+  border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 260px solid rgba(255,170,0,0.15);
+  top: 40%; left: 50%;
+  transform: translateX(-50%) rotate(-15deg);
+}
+
+.color-swatch {
+  position: absolute;
+  width: 100px;
+  height: 300px;
+  border-radius: 50px;
+}
+.swatch-1 { top: 10%; left: 10%; background: #ffaa00; transform: rotate(15deg); }
+.swatch-2 { bottom: 10%; right: 10%; background: #ff5500; transform: rotate(-25deg); }
+
+/* Side Navigation */
+.cinematic-side-nav {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.side-nav-item {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .intro-text { font-size: 24px; }
+  .scene-headline { font-size: 50px; }
+  .scene-desc { font-size: 16px; padding: 0 10px; }
+  .bg-element { transform: scale(0.6) !important; }
+  .cinematic-side-nav { display: none; }
+  
+  /* Scene 01 Adjustments */
+  .web-code { font-size: 16px; }
+  .web-browser:not(.offset) { width: 250px; height: 180px; top: 10%; right: 5%; }
+  .web-browser.offset { width: 200px; height: 250px; bottom: 5%; left: 5%; }
+
+  /* Scene 02 Adjustments */
+  .wireframe-box:not(.tall) { width: 300px; height: 80px; top: 15%; left: 10%; }
+  .wireframe-box.tall { width: 150px; height: 250px; bottom: 10%; right: 10%; }
+
+  /* Scene 04 Adjustments */
+  .metric-counter { font-size: 40px; top: 20%; right: 10%; }
+  .chart-bar { width: 40px; }
+  
+  /* Scene 05 Adjustments */
+  .shape-circle { width: 150px; height: 150px; top: 10%; right: 10%; }
+  .shape-square { width: 120px; height: 120px; bottom: 15%; left: 10%; }
+  .shape-triangle { border-left: 80px solid transparent; border-right: 80px solid transparent; border-bottom: 140px solid rgba(255,170,0,0.15); }
+  
+  .color-swatch { width: 60px; height: 180px; }
+}
