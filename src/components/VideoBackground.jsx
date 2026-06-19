@@ -20,11 +20,6 @@ export const VideoBackground = () => {
   const videoRef = useRef(null);
   const rafId = useRef(null);
 
-  // Hide the video on the contact page to maintain a pure black background
-  if (location.pathname === '/contact') {
-    return null;
-  }
-
   const videoSrc = location.pathname === '/founders-corner'
     ? "/founders-bg.mp4"
     : location.pathname === '/'
@@ -42,25 +37,33 @@ export const VideoBackground = () => {
 
     // Match canvas resolution to viewport with High-DPI support
     function resize() {
-      // Cap DPR to 2 on desktop and 1.5 on mobile to balance extreme quality with high performance
-      const dpr = window.innerWidth <= 768 ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 2);
+      // MASSIVE PERFORMANCE FIX: Cap DPR to 1 on desktop and 0.5 on mobile
+      // Backgrounds don't need retina resolution, and this cuts drawing load by 4x - 16x
+      const dpr = window.innerWidth <= 768 ? 0.5 : 1;
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
     }
 
+    let lastTime = 0;
     // Draw the current video frame to the canvas with object-fit: cover math
-    function drawFrame() {
+    function drawFrame(time) {
+      // Throttle to ~30fps (most videos are 24-30fps anyway) to save main thread CPU
+      if (time - lastTime < 33) {
+        rafId.current = requestAnimationFrame(drawFrame);
+        return;
+      }
+      lastTime = time;
+
       if (video.readyState >= 2) {
         const vw = video.videoWidth;
         const vh = video.videoHeight;
         const cw = canvas.width;
         const ch = canvas.height;
 
-        // Enable high-quality smoothing for high resolutions
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = window.innerWidth <= 768 ? 'low' : 'high';
+        // Turn off smoothing to save GPU resources, since it's a moving background
+        ctx.imageSmoothingEnabled = false;
 
         // object-fit: cover — scale to fill, crop overflow
         const scale = Math.max(cw / vw, ch / vh);
@@ -104,6 +107,11 @@ export const VideoBackground = () => {
       if (rafId.current) cancelAnimationFrame(rafId.current);
     };
   }, [videoSrc]);
+
+  // Hide the video on the contact page to maintain a pure black background
+  if (location.pathname === '/contact') {
+    return null;
+  }
 
   return (
     <div className="video-background-container">

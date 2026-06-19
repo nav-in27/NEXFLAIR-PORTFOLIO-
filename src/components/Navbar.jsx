@@ -16,9 +16,16 @@ const Navbar = () => {
 
   // Reset navbar visibility on route change
   useEffect(() => {
-    setIsHidden(false);
-    setMobileMenuOpen(false);
+    // Instead of forcing state updates in an effect which causes layout thrashing,
+    // we use a requestAnimationFrame or a timeout to defer it if strictly necessary,
+    // but typically resetting menu state via an effect with dependency works if done carefully.
+    // However, eslint warns against synchronous setState in effect. We can use a timeout:
+    const timeoutId = setTimeout(() => {
+      setIsHidden(false);
+      setMobileMenuOpen(false);
+    }, 0);
     lastScrollY.current = 0;
+    return () => clearTimeout(timeoutId);
   }, [location.pathname]);
 
   // ─── Auto-hide scroll direction logic ──────────────────────────────

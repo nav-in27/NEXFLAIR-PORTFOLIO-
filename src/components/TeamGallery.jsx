@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './founders.css';
 
@@ -10,14 +10,23 @@ const TeamGallery = () => {
     `/cgi-frames/ezgif-frame-${(180 + i).toString().padStart(3, '0')}.jpg`
   );
 
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [selectedImage]);
+
   const openLightbox = (src) => {
     setSelectedImage(src);
-    document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
-    document.body.style.overflow = 'auto';
   };
 
   return (

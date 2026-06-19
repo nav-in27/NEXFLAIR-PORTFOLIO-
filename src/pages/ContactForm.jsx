@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Check, X } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
@@ -29,18 +29,6 @@ const ContactForm = () => {
       inputRef.current.focus();
     }
   }, [step]);
-
-  // Handle enter key to proceed
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Allow multi-line input for requirements (step 6) without triggering next on Enter
-      if (e.key === 'Enter' && step !== 6) {
-        handleNext();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  });
 
   const submitForm = async () => {
     setStep(7); // Submitting state
@@ -96,6 +84,18 @@ const ContactForm = () => {
       setError('');
     }
   };
+
+  // Handle enter key to proceed
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Allow multi-line input for requirements (step 6) without triggering next on Enter
+      if (e.key === 'Enter' && step !== 6) {
+        handleNext();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [step, formData, handleNext]);
 
   const websiteTypesList = [
     'Corporate Website', 'E-Commerce', 'Portfolio', 'Landing Page', 
