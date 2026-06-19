@@ -25,7 +25,7 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => window.open('https://wa.me/917010296819', '_blank')}
+            onClick={() => window.open('https://wa.me/916380046014', '_blank')}
           >
             Let's Talk
           </motion.button>

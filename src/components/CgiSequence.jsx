@@ -25,8 +25,8 @@ const CgiSequence = () => {
     
     // Set canvas dimensions accounting for high-DPI (4k/Retina) displays
     const updateCanvasSize = () => {
-      // Limit device pixel ratio on mobile to drastically improve render performance
-      const dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.5) : (window.devicePixelRatio || 1);
+      // Cap device pixel ratio to 1.5 on mobile and 2 on desktop to drastically improve render performance without losing noticeable quality
+      const dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;

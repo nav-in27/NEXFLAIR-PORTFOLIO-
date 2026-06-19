@@ -16,10 +16,12 @@
   padding: 0;
 }
 
-html,
+html {
+  background-color: #000;
+}
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-color);
+  background-color: transparent;
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
@@ -1581,7 +1583,7 @@ a {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 /* Hidden video source — must NOT use display:none (browser skips decoding).

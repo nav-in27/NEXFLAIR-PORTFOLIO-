@@ -40,10 +40,14 @@ export const VideoBackground = () => {
 
     const ctx = canvas.getContext('2d');
 
-    // Match canvas resolution to viewport
+    // Match canvas resolution to viewport with High-DPI support
     function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      // Cap DPR to 2 on desktop and 1.5 on mobile to balance extreme quality with high performance
+      const dpr = window.innerWidth <= 768 ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
     }
 
     // Draw the current video frame to the canvas with object-fit: cover math
@@ -53,6 +57,10 @@ export const VideoBackground = () => {
         const vh = video.videoHeight;
         const cw = canvas.width;
         const ch = canvas.height;
+
+        // Enable high-quality smoothing for high resolutions
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = window.innerWidth <= 768 ? 'low' : 'high';
 
         // object-fit: cover — scale to fill, crop overflow
         const scale = Math.max(cw / vw, ch / vh);

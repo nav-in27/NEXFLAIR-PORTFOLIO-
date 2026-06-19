@@ -10,7 +10,7 @@ const founders = [
     name: 'NAVEEN R',
     role: 'FOUNDER & CEO',
     description: 'Founder of Nexflair. Not driven by trends. Driven by possibilities. He founded Nexflair with a vision to bridge creativity and technology, transforming bold ideas into meaningful digital experiences. From modern websites and intelligent systems to AI-powered solutions, his work is centered on one principle: build things that create real value.',
-    image: '/images/naveen-founder.webp'
+    image: '/images/gemini-founder.png'
   },
   {
     name: 'KOKILAN',

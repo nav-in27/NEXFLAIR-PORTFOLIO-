@@ -8,7 +8,6 @@ import Home from './pages/Home';
 import FoundersCorner from './pages/FoundersCorner';
 import ServicesPage from './pages/ServicesPage';
 import ContactForm from './pages/ContactForm';
-import WhatsAppButton from './components/WhatsAppButton';
 import './index.css';
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
           <Route path="/contact" element={<ContactForm />} />
         </Routes>
         <Footer />
-        <WhatsAppButton />
       </div>
     </Router>
   );

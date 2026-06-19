@@ -61,10 +61,9 @@ const Services = () => {
         duration: 2
       }, 0);
 
-      // Hold intro for a moment, then fade it out with a blur
+      // Hold intro for a moment, then fade it out
       tl.to(introRef.current, {
         opacity: 0,
-        filter: 'blur(20px)',
         scale: 1.2,
         duration: 2,
         ease: "power2.in"
@@ -135,7 +134,6 @@ const Services = () => {
             autoAlpha: 0,
             scale: 1.2,
             z: 500,
-            filter: "blur(10px)",
             duration: 1.5,
             ease: "power2.in"
           }, startTime + 3.5);
